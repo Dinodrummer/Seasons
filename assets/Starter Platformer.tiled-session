@@ -1,0 +1,67 @@
+{
+    "activeFile": "platformer-level-1.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1.5063657407407407,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 461.37533615059556,
+                "y": 224.71302343449867
+            }
+        },
+        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx#kenny_tilemap_packed": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "platformer-level-1.tmx": {
+            "expandedObjectLayers": [
+                9
+            ],
+            "scale": 1.5,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 1800.3333333333333,
+                "y": 270.3333333333333
+            }
+        },
+        "platformer-level-1.tmx#kenny_tilemap_packed": {
+            "scaleInDock": 1
+        },
+        "platformer-level-1.tmx#tilemap-backgrounds_packed": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/StarterPlatformer/assets",
+    "last.imagePath": "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/StarterPlatformer/assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 18,
+    "map.tileWidth": 18,
+    "map.width": 40,
+    "openFiles": [
+        "platformer-level-1.tmx",
+        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx"
+    ],
+    "project": "Starter Platformer.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx",
+        "platformer-level-1.tmx"
+    ],
+    "resizeMap.removeObjects": false,
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 18,
+        "width": 18
+    }
+}
