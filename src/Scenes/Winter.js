@@ -165,7 +165,7 @@ class Winter extends Phaser.Scene {
             });
 
             this.time.delayedCall(1000, () => {
-                this.scene.start("win");
+                this.scene.start("winterToSpring");
             });
             
             //this.score += 500;
