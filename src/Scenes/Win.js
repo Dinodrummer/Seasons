@@ -34,7 +34,7 @@ class Win extends Phaser.Scene {
 
     update(time, delta) {
         if (this.restart.isDown) {
-            this.scene.start("platformerScene");
+            this.scene.start("winterScene");
         }
     }
 

@@ -12,7 +12,9 @@ class Load extends Phaser.Scene {
         // Load tilemap information
         this.load.image("tilemap_tiles", "tilemap_packed.png");                         // Packed tilemap
         this.load.image("bgTilemap_tiles", "tilemap-backgrounds_packed.png");
-        this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
+        this.load.tilemapTiledJSON("winterLevel", "winterLevel.tmj");   // Tilemap in JSON
+        //this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
+        
 
         this.load.audio("coin", "toggle_001.ogg");
         this.load.audio("power", "powerUp7.ogg");
@@ -71,7 +73,7 @@ class Load extends Phaser.Scene {
         });
 
          // ...and pass to the next Scene
-         this.scene.start("platformerScene");
+         this.scene.start("winterScene");
     }
 
     // Never get here since a new scene is started in create()
