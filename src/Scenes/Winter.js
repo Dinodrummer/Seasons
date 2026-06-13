@@ -20,6 +20,7 @@ class Winter extends Phaser.Scene {
         this.map = this.add.tilemap("winterLevel", 18, 18, 275, 60);
 
         
+        
         // Add a tileset to the map
         // First parameter: name we gave the tileset in Tiled
         // Second parameter: key for the tilesheet (from this.load.image in Load.js)
@@ -137,6 +138,8 @@ class Winter extends Phaser.Scene {
         my.sprite.player.setCollideWorldBounds(true);
         my.sprite.player.body.setMaxVelocityX(this.MAX_VELOCITY);
 
+        my.text.score = this.add.bitmapText(this.spawn[0].x - 80, this.spawn[0].y - 100, "rocketSquare", "Hold Q to glide");
+
         this.foreLayer = this.map.createLayer("fore", this.tileset, 0, 0);
         //this.foreLayer.setScale(0.5);
 
@@ -153,7 +156,7 @@ class Winter extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.goalGroup, (obj1, obj2) => {
-            //obj2.destroy(); // remove coin on overlap
+            obj2.destroy();
             goalParticle.start();
             goalParticle.x = obj2.x;
             goalParticle.y = obj2.y;
@@ -162,7 +165,7 @@ class Winter extends Phaser.Scene {
             });
 
             this.time.delayedCall(1000, () => {
-                this.scene.start("winterToSpring");
+                this.scene.start("win");
             });
             
             //this.score += 500;

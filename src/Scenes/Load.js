@@ -41,6 +41,7 @@ class Load extends Phaser.Scene {
         });
 
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
+        this.load.bitmapFont("rocketSquare", "KennyRocketSquare_0.png", "KennyRocketSquare.fnt");
     }
 
     create() {
