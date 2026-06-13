@@ -11,7 +11,7 @@ class Winter extends Phaser.Scene {
         this.JUMP_VELOCITY = -600;
         this.walkCool = 15;
         this.walk = 0;
-        this.MAX_VELOCITY = 1300;
+        this.MAX_VELOCITY = 300;
         this.my = {text: {}};
     }
 
