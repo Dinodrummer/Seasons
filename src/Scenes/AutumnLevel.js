@@ -111,7 +111,7 @@ class AutumnLevel extends Phaser.Scene {
         });
 
         this.physics.add.overlap(my.sprite.player, this.goalGroup, () => {
-            this.scene.start("SCENE_NAME");
+            this.scene.start("autumnToWinter");
         });
 
 

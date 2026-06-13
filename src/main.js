@@ -31,7 +31,7 @@ let config = {
     },
     width: 1893,
     height: 900,
-    scene: [Load, Platformer, AutumnLevel, Win]
+    scene: [Load, Platformer, AutumnLevel, Win, AutumnToWinter, WinterToSpring]
 }
 
 var cursors;
