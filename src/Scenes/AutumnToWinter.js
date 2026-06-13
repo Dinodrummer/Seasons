@@ -21,7 +21,7 @@ class AutumnToWinter extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
-            this.scene.start("autumnScene");
+            this.scene.start("winterScene");
         }
     }
 }

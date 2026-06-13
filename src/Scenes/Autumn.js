@@ -1,6 +1,6 @@
-class Spring extends Phaser.Scene {
+class Autumn extends Phaser.Scene {
     constructor() {
-        super("platformerScene");
+        super("autumnScene");
     }
 
     init() {
@@ -13,30 +13,27 @@ class Spring extends Phaser.Scene {
         this.walk = 0;
         this.MAX_VELOCITY = 300;
         this.my = {text: {}};
-        this.maxJumps = 1; // total jumps allowed (1 = single jump, 2 = double jump (when get powerup))
-        this.jumpsRemaining = this.maxJumps;
-        this.wasOnGround = false;
-        this.movementdisabled = false;
+        this.LEFT_WALL_JUMP_AVAILABLE = true;
+        this.RIGHT_WALL_JUMP_AVAILABLE = true;
     }
 
     create() {
+        // Create a new tilemap game object which uses 18x18 pixel tiles, and is
+        // 45 tiles wide and 25 tiles tall.
+        this.map = this.add.tilemap("autumn-level", 18, 18, 30, 80);
 
-        this.map = this.make.tilemap({ key: "spring" });
-
+        // Add a tileset to the map
+        // First parameter: name we gave the tileset in Tiled
+        // Second parameter: key for the tilesheet (from this.load.image in Load.js)
         this.tileset = this.map.addTilesetImage("tilemap_packed", "tilemap_tiles");
         this.bgTileset = this.map.addTilesetImage("tilemap-backgrounds_packed", "bgTilemap_tiles");
+        this.autumnTileset = this.map.addTilesetImage("autumn_tilemap_packed", "autumn_tilemap_tiles");
 
-        this.bgLayer = this.map.createLayer("bg", this.bgTileset, 0, 0);
-        this.groundLayer = this.map.createLayer("Ground-n-Platforms", this.tileset, 0, 0);
-        this.platLayer = this.map.createLayer("Platforms", this.tileset, 0, 0);
-        this.bgLayer.setScrollFactor(0.75); // parallax scrolling
-    
-        this.groundLayer.setCollisionByProperty({
-            Collides: true // ground collision
-        });
-        this.platLayer.setCollisionByProperty({
-            Collides: true // platform collision
-        });
+        this.bgLayer = this.map.createLayer("bg", [this.bgTileset, this.autumnTileset], 0, 0);
+
+        // Create a layer
+        this.groundLayer = this.map.createLayer("Ground-n-Platforms", [this.tileset, this.autumnTileset], 0, 0);
+        //this.groundLayer.setScale(0.5);
 
         //coin vfx
         let coinParticle = this.add.particles(
@@ -56,28 +53,6 @@ class Spring extends Phaser.Scene {
                 //gravityY: -50,
                 emitting: false,
                 stopAfter: 50
-            }
-        );
-
-        //goal vfx
-        let goalParticle = this.add.particles(
-            40, 
-            40, 
-            'kenny-particles', 
-            {
-                frame: "star_02.png",
-                radial: true,
-                speed: {min: 50, max: 100},
-                lifespan: 600,
-                //frequency: 500,
-                scale: {start: 0.09, end: 0.03},
-                blendMode: "ADD",
-                //maxAliveParticles: 3,
-                quantity: 70,
-                //gravityY: -50,
-                emitting: false,
-                stopAfter: 70,
-                alpha: {start: 1, end: 0}
             }
         );
 
@@ -105,18 +80,23 @@ class Spring extends Phaser.Scene {
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
         this.coinGroup = this.add.group(this.coins);
 
-        //player spawn
-        this.spawn = this.map.createFromObjects("objects", {
-            name: "spawn",
+        //goal handling
+        this.goals = this.map.createFromObjects("objects", {
+            name: "goal",
             key: "tilemap_sheet",
-            frame: 157
+            frame: 112
         });
 
+        this.physics.world.enable(this.goals, Phaser.Physics.Arcade.STATIC_BODY);
+        this.goalGroup = this.add.group(this.goals);
+
         // set up player avatar
-        my.sprite.player = this.physics.add.sprite(this.spawn[0].x, this.spawn[0].y, "platformer_characters", "tile_0000.png");
+        my.sprite.player = this.physics.add.sprite(36, 1368, "platformer_characters", "tile_0000.png");
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels + 2000);
         my.sprite.player.setCollideWorldBounds(true);
         my.sprite.player.body.setMaxVelocityX(this.MAX_VELOCITY);
+
+        this.transLayer = this.map.createLayer("transition", [this.tileset, this.autumnTileset], 0, 0);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
             obj2.destroy(); // remove coin on overlap
@@ -130,71 +110,33 @@ class Spring extends Phaser.Scene {
             //my.text.score.setText("Score " + this.score);
         });
 
-        //goal handling
-        this.goal = this.map.createFromObjects("objects", {
-            name: "goal",
-            key: "tilemap_sheet",
-            frame: 9
+        this.physics.add.overlap(my.sprite.player, this.goalGroup, () => {
+            this.scene.start("autumnToWinter");
         });
 
-        this.physics.world.enable(this.goal, Phaser.Physics.Arcade.STATIC_BODY);
-        this.goalGroup = this.add.group(this.goal);
-
-        this.physics.add.overlap(my.sprite.player, this.goalGroup, (obj1, obj2) => {
-            obj2.destroy(); // remove coin on overlap
-            goalParticle.start();
-            goalParticle.x = obj2.x;
-            goalParticle.y = obj2.y;
-            this.sound.play("goal", {
-                volume: 0.4
-            });
-
-            this.time.delayedCall(1000, () => {
-                this.scene.start("win");
-            });
-            
-            //this.score += 500;
-            //my.text.score.setText("Score " + this.score);
-        });
-
-        //power-up handling
-        this.gem = this.map.createFromObjects("objects", {
-            name: "power",
-            key: "tilemap_sheet",
-            frame: 10
-        });
-
-        this.physics.world.enable(this.gem, Phaser.Physics.Arcade.STATIC_BODY);
-        this.gemGroup = this.add.group(this.gem);
-
-        this.physics.add.overlap(my.sprite.player, this.gemGroup, (obj1, obj2) => {
-            obj2.destroy(); // remove coin on overlap
-            coinParticle.start();
-            coinParticle.x = obj2.x;
-            coinParticle.y = obj2.y;
-            this.maxJumps = 2; // allow double jump
-            this.sound.play("power", {
-                volume: 0.4
-            });
-        });
 
         // Make it collidable
         this.groundLayer.setCollisionByProperty({
             collides: true
         });
 
-        this.platLayer.setCollisionByProperty({
-            collides: true
-        });
+
+        
+
+        //this.cameras.main.setBounds(0, 0, 0, 0, my.sprite.player);
+        //this.cameras.main.setZoom(1.5);
+        //this.cameras.main.setPosition(game.config.width/4, game.config.height/2);
+        //this.cameras.main.setScroll(game.config.width/4, game.config.height/2);
+        //this.cameras.main.centerOn(game.config.width/4, game.config.height/2);
+        //this.cameras.main.startFollow(my.sprite.player, true, 0.5, 0.9, 0, 150);
 
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.cameras.main.startFollow(my.sprite.player, true, 0.10, 0.25); // (target, [,roundPixels][,lerpX][,lerpY])
-        this.cameras.main.setDeadzone(50, 50);
-        this.cameras.main.setZoom(1.8);
+        this.cameras.main.startFollow(my.sprite.player, true, 0.10, 0.25);
+        this.cameras.main.setDeadzone(540, 50);
+        this.cameras.main.setZoom(3.5);
         
         // Enable collision handling
         this.physics.add.collider(my.sprite.player, this.groundLayer);
-        this.physics.add.collider(my.sprite.player, this.platLayer);
 
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
@@ -213,6 +155,26 @@ class Spring extends Phaser.Scene {
 
     update() {
         this.walk++;
+
+        // Wall jumping
+        if(my.sprite.player.body.blocked.left) {
+            my.sprite.player.body.velocity.y *= 0.85;
+            if(!my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) && this.LEFT_WALL_JUMP_AVAILABLE) {
+                my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
+                my.sprite.player.body.setVelocityX(200);
+                this.RIGHT_WALL_JUMP_AVAILABLE = true;
+                this.LEFT_WALL_JUMP_AVAILABLE = false;
+            }
+        } else if(my.sprite.player.body.blocked.right) {
+            my.sprite.player.body.velocity.y *= 0.85;
+            if(!my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up) && this.RIGHT_WALL_JUMP_AVAILABLE) {
+                my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
+                my.sprite.player.body.setVelocityX(-200);
+                this.RIGHT_WALL_JUMP_AVAILABLE = false;
+                this.LEFT_WALL_JUMP_AVAILABLE = true;
+            }
+        }
+
         if(cursors.left.isDown) {
             /*
             if(my.sprite.player.body.velocity.x <= 0){
@@ -276,24 +238,14 @@ class Spring extends Phaser.Scene {
         if(!my.sprite.player.body.blocked.down) {
             my.sprite.player.anims.play('jump');
         }
-        if (my.sprite.player.body.blocked.down && !this.wasOnGround) {
-            this.jumpsRemaining = this.maxJumps;
-        }
-
-        // double jump
-        if (Phaser.Input.Keyboard.JustDown(cursors.up) && this.movementdisabled != true) {
-            if (my.sprite.player.body.blocked.down) {
-                my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
-                this.jumpsRemaining = this.maxJumps - 1;
-                this.sound.play("jump", {
-                        volume: 0.5
-                });
-            } else if (this.jumpsRemaining > 0) {
-                my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
-                this.jumpsRemaining--;
-                this.sound.play("bigJump", {
-                        volume: 0.5
-                });
+        if(my.sprite.player.body.blocked.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+            my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
+            this.LEFT_WALL_JUMP_AVAILABLE = true;
+            this.RIGHT_WALL_JUMP_AVAILABLE = true;
+            if (this.JUMP_VELOCITY == -600) {
+                this.sound.play("jump", { volume: 0.5 });
+            } else {
+                this.sound.play("bigJump", { volume: 0.5 });
             }
         }
 
