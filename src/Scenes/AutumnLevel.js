@@ -80,6 +80,16 @@ class AutumnLevel extends Phaser.Scene {
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
         this.coinGroup = this.add.group(this.coins);
 
+        //goal handling
+        this.goals = this.map.createFromObjects("objects", {
+            name: "goal",
+            key: "tilemap_sheet",
+            frame: 112
+        });
+
+        this.physics.world.enable(this.goals, Phaser.Physics.Arcade.STATIC_BODY);
+        this.goalGroup = this.add.group(this.goals);
+
         // set up player avatar
         my.sprite.player = this.physics.add.sprite(36, 1368, "platformer_characters", "tile_0000.png");
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels + 2000);
@@ -98,6 +108,10 @@ class AutumnLevel extends Phaser.Scene {
             });
             //this.score += this.COIN_VALUE;
             //my.text.score.setText("Score " + this.score);
+        });
+
+        this.physics.add.overlap(my.sprite.player, this.goalGroup, () => {
+            this.scene.start("SCENE_NAME");
         });
 
 
