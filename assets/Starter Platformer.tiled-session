@@ -8,6 +8,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "#tilemap-backgrounds_packed": {
+            "scaleInDock": 1
+        },
         "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx": {
             "expandedObjectLayers": [
                 3
@@ -27,11 +30,11 @@
             "expandedObjectLayers": [
                 9
             ],
-            "scale": 1.5,
+            "scale": 0.2771,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 1800.3333333333333,
-                "y": 270.3333333333333
+                "x": 1735.8354384698664,
+                "y": 469.1447130999638
             }
         },
         "platformer-level-1.tmx#kenny_tilemap_packed": {
@@ -39,24 +42,60 @@
         },
         "platformer-level-1.tmx#tilemap-backgrounds_packed": {
             "scaleInDock": 1
+        },
+        "spring.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.2548,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2331.845712464138,
+                "y": 336.3085750717246
+            }
+        },
+        "spring.tmx#tilemap-backgrounds_packed": {
+            "scaleInDock": 1
+        },
+        "spring.tmx#tilemap_packed": {
+            "scaleInDock": 1
+        },
+        "spring_summer.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.3062,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 865.4474199869367,
+                "y": 447.4199869366426
+            }
+        },
+        "spring_summer.tmx#tilemap-backgrounds_packed": {
+            "scaleInDock": 1
+        },
+        "spring_summer.tmx#tilemap_packed": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/StarterPlatformer/assets",
-    "last.imagePath": "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/StarterPlatformer/assets",
+    "last.imagePath": "/Users/ray/Desktop/cmpm120_ray/Seasons-PotatoM8-22-patch-1/assets",
+    "map.height": 30,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 18,
     "map.tileWidth": 18,
-    "map.width": 40,
+    "map.width": 150,
     "openFiles": [
         "platformer-level-1.tmx",
-        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx"
+        "spring_summer.tmx"
     ],
     "project": "Starter Platformer.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx",
-        "platformer-level-1.tmx"
+        "platformer-level-1.tmx",
+        "spring_summer.tmx",
+        "C:/Users/a_sch/OneDrive/Desktop/CMPM 120/PlatformImprovement/assets/platformer-level-1.tmx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.embedInMap": true,
