@@ -15,6 +15,7 @@ class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("winterLevel", "winterLevel.tmj");   // Tilemap in JSON
         //this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");   // Tilemap in JSON
         
+        this.load.bitmapFont("rocketSquare", "KennyRocketSquare_0.png", "KennyRocketSquare.fnt");
 
         this.load.audio("coin", "toggle_001.ogg");
         this.load.audio("power", "powerUp7.ogg");
