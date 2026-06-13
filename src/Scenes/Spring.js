@@ -168,7 +168,7 @@ class Spring extends Phaser.Scene {
         this.gemGroup = this.add.group(this.gem);
 
         this.physics.add.overlap(my.sprite.player, this.gemGroup, (obj1, obj2) => {
-            obj2.destroy(); // remove coin on overlap
+            obj2.destroy(); // remove powerup on overlap
             coinParticle.start();
             coinParticle.x = obj2.x;
             coinParticle.y = obj2.y;
@@ -189,7 +189,7 @@ class Spring extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(my.sprite.player, true, 0.10, 0.25); // (target, [,roundPixels][,lerpX][,lerpY])
-        this.cameras.main.setDeadzone(50, 50);
+        this.cameras.main.setDeadzone(25, 25);
         this.cameras.main.setZoom(1.8);
         
         // Enable collision handling
@@ -288,7 +288,7 @@ class Spring extends Phaser.Scene {
                 this.sound.play("jump", {
                         volume: 0.5
                 });
-            } else if (this.jumpsRemaining > 0) {
+            } else if (this.jumpsRemaining > 1) {
                 my.sprite.player.body.setVelocityY(this.JUMP_VELOCITY);
                 this.jumpsRemaining--;
                 this.sound.play("bigJump", {
@@ -300,5 +300,10 @@ class Spring extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.rKey)) {
             this.scene.restart();
         }
+
+        if(my.sprite.player.y > this.map.heightInPixels) {
+            this.scene.restart();
+        }
+
     }
 }
