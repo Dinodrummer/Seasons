@@ -1,0 +1,45 @@
+{
+    "activeFile": "autumn-level.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "autumn-level.tmx": {
+            "scale": 0.3226041666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1721.9244430093636,
+                "y": 668.0012915724895
+            }
+        },
+        "autumn-level.tmx#autumn_tilemap_packed": {
+            "scaleInDock": 1
+        },
+        "autumn-level.tmx#tilemap-backgrounds_packed": {
+            "scaleInDock": 1
+        },
+        "autumn-level.tmx#tilemap_packed": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/jtgru/OneDrive/Documents/Seasons/assets",
+    "last.imagePath": "/home/jt/Documents/Seasons/assets",
+    "map.height": 80,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 18,
+    "map.tileWidth": 18,
+    "openFiles": [
+        "autumn-level.tmx"
+    ],
+    "project": "AutumnLevel.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "autumn-level.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 18,
+        "width": 18
+    }
+}
